@@ -6,7 +6,8 @@ import SignUp from "./pages/SignUp";
 import CreatePost from "./pages/CreatePost";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserProfile } from "./store/user/selectors";
-import { logout } from "./store/user/actions";
+import { logout, bootstrapLogin, setToken } from "./store/user/actions";
+import { useEffect } from "react";
 
 const NavBar = () => {
   const profile = useSelector(getUserProfile);
@@ -50,6 +51,15 @@ const NavBar = () => {
 };
 
 function App() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      dispatch(bootstrapLogin(token));
+      dispatch(setToken(token));
+    }
+  }, []);
+
   return (
     <div className="App">
       <NavBar />

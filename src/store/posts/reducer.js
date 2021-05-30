@@ -12,6 +12,14 @@ const reducer = (state = initialState, action) => {
         all: [...state.all, ...newPosts],
       };
     }
+    case "NEW_POST": {
+      //state.all => posts are stored, payload => a new post
+      const oneNewPost = action.payload; // {title, content}
+      return {
+        ...state,
+        all: [oneNewPost, ...state.all],
+      };
+    }
     case "START_LOADING": {
       return {
         ...state,
