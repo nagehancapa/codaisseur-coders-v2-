@@ -1,8 +1,11 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { getPosts } from "../store/posts/selectors";
 
 const HomePage = () => {
-  const [posts, setPosts] = useState([]);
+  const dispatch = useDispatch();
+  const posts = useSelector(getPosts);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -11,7 +14,10 @@ const HomePage = () => {
           "https://codaisseur-coders-network.herokuapp.com/posts"
         );
         console.log(response.data.rows);
-        setPosts(response.data.rows);
+
+        const allPosts = response.data.rows;
+        const action = { type: "STORE_POSTS", payload: allPosts };
+        dispatch(action);
       } catch (error) {
         console.log(error.message);
       }
