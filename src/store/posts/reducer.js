@@ -1,4 +1,5 @@
 const initialState = {
+  loading: false,
   all: [],
 };
 
@@ -9,6 +10,18 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         all: [...state.all, ...newPosts],
+      };
+    }
+    case "START_LOADING": {
+      return {
+        ...state,
+        loading: true,
+      };
+    }
+    case "STOP_LOADING": {
+      return {
+        ...state,
+        loading: false,
       };
     }
     default: {
