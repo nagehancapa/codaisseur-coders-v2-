@@ -10,6 +10,10 @@ const setProfile = (userData) => ({
   payload: { profile: userData },
 });
 
+export const logout = () => ({
+  type: "LOGOUT",
+});
+
 export const signup = (name, email, password) => async (dispatch, getState) => {
   try {
     console.log("params in thunk", { name, email, password });

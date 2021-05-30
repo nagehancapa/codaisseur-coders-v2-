@@ -17,6 +17,12 @@ const reducer = (state = initialState, action) => {
         profile: action.payload.profile,
       };
     }
+    case "LOGOUT": {
+      return {
+        profile: null,
+        token: null,
+      };
+    }
     default: {
       return state;
     }
